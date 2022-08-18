@@ -5,3 +5,21 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require 'faker'
+CATEGORIES = ["chinese", "italian", "japanese", "french", "belgian"].freeze
+
+# db/seeds.rb
+puts 'Cleaning database...'
+Restaurant.destroy_all
+
+  5.times do
+  restaurant = Restaurant.create(
+  name: Faker::Restaurant.name,
+  address: Faker::Address.full_address,
+  phone_number: Faker::PhoneNumber.cell_phone_in_e164,
+  category: CATEGORIES.sample)
+  puts "Created #{restaurant.name}"
+
+end
+
+puts "finished seeding"
